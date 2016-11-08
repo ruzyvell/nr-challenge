@@ -13,7 +13,7 @@ request('http://www.cnpq.br/web/guest/licitacoes', function(err, res, body){
 		var title = $(this).find('.data_licitacao a').text().trim();
 		var title = $(this).find('.outro-doc-link a').text().trim();
 
-		console.log(`Titulo: ` + title);
+		console.log(`Titulo: ` + titLicitacao);
 
 		fs.appendFile(`dados.txt`)
 	});
