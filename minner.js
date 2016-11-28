@@ -1,10 +1,17 @@
-var request = require('request');
-var cheerio = require('cheerio');
-var fs = require('fs');
-
-request('http://www.cnpq.br/web/guest/licitacoes', function(err, res, body){
+var Crawler = {
+	request : null,
+	cheerio : null,
+	fs      : null,
+	init : function(){
+		Crawler.request = require('request');
+		Crawler.cheerio = require('cheerio');
+		Crawler.fs      = require('fs');
+		Crawler.getData();
+	},
+	getData: function(){
+	Crawler.request('http://www.cnpq.br/web/guest/licitacoes', function(err, res, body){
 	if (err) console.log('Erro: ' + err);
-	var $ = cheerio.load(body);
+	var $ = Crawler.cheerio.load(body);
 	$('.formLicit tr').each(function() {
 		var title = $(this).find('.titLicitacao a').text().trim();
 		var title = $(this).find('.cont_licitacoes a').text().trim();
@@ -12,7 +19,8 @@ request('http://www.cnpq.br/web/guest/licitacoes', function(err, res, body){
 		var title = $(this).find('.outro-doc-link a').text().trim();
 
 		console.log(`Titulo: ` + titLicitacao);
-		fs.appendFile(`dados.txt`)
+		Crawler.fs.appendFile(`dados.txt`)
 	});
 
 }
+Crawler.init();
