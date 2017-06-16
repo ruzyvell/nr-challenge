@@ -10,4 +10,4 @@
 # ./craw.js
 
 
-# Script criado em nodejs para mineiração de dados.
+# Script criado em nodejs para mineração de dados.
